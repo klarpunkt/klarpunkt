@@ -5,11 +5,12 @@ const OpenAI = require("openai");
 
 const app = express();
 
-// CORS für Preflight-Anfragen (OPTIONS) aktivieren
-app.options('*', cors({ origin: 'https://klarpunktgptlivetest.netlify.app' }));
-
-// CORS für alle anderen Anfragen aktivieren
-app.use(cors({ origin: 'https://klarpunktgptlivetest.netlify.app' }));
+// CORS Middleware: Erlaubt alle Anfragen vom Netlify-Frontend
+app.use(cors({
+  origin: "https://klarpunktgptlivetest.netlify.app",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 app.use(bodyParser.json());
 
