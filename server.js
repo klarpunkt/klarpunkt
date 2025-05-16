@@ -4,7 +4,13 @@ const cors = require("cors");
 const OpenAI = require("openai");
 
 const app = express();
-app.use(cors({ origin: "https://klarpunktgptlivetest.netlify.app" }));
+
+// CORS für Preflight-Anfragen (OPTIONS) aktivieren
+app.options('*', cors({ origin: 'https://klarpunktgptlivetest.netlify.app' }));
+
+// CORS für alle anderen Anfragen aktivieren
+app.use(cors({ origin: 'https://klarpunktgptlivetest.netlify.app' }));
+
 app.use(bodyParser.json());
 
 const openai = new OpenAI({
